@@ -1,0 +1,25 @@
+title: IEEEtran Template
+author: Gael Close
+version: 0.1.0
+contributes:
+  formats:
+    pdf:
+      template: ieeetran-template.tex
+      fig-format: png
+      pdf-engine: pdflatex
+      csl: ieee-with-url.csl
+      cite-method: citeproc
+      link-citations: true
+      format-resources:
+        # Add here the resources required for the PDF rendering
+        - IEEEtran.cls
+        - custom.scss
+    html:
+      # define default configuration for the html version of your format
+      number-sections: true
+      toc: true
+      toc-location: left
+      csl: ieee-with-url.csl
+      code-fold: true
+      theme:
+        - custom.scss

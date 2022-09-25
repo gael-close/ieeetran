@@ -1,21 +1,14 @@
 ---
-title: "A Sample Article Using IEEEtran.cls\\ for IEEE Journals and Transactions"
+title: A Sample Article for IEEE Transactions
 format:
-  pdf:
-    template: my-template.tex
+  ieeetran-pdf:
     keep-tex: true
-    fig-format: png
-    pdf-engine: pdflatex
-    csl: ieee-with-url.csl
-    cite-method: biblatex
-    #link-citations: true
-  aft-pdf:
-    keep-tex: true
+    
 author:
   - name: First Author
     orcid: 0000-0000-0000-0000
     email: first@example.org
-    note: 1  # workaround i/o affiliation
+    note: 1  # workaround i/o linked affiliation
   - name: Second Author
     orcid: 0000-0000-0000-0000
     email: second@example.org
@@ -26,16 +19,19 @@ author:
 date: 01-Jan-2022.
 affiliations:
   - id: 1
-    name: Carnegie Mellon University
-    city: Pittsburgh
+    name: Stanford University
+    city: Stanford
     country: USA
   - id: 2
     name: Some corporation
-    city: Nyew York
+    city: New York
     country: USA
 
 abstract: |
-  This document is only a demo explaining how to use the template.
+  This document is a sample illustrating the Quarto `ieeetran` template.
+  It includes the key elements of a scientific articles 
+  (references, equations, figures, tables, code, cross references).
+  The template enables the generation of IEEE-formatted article from a Jupypter notebook.
 keywords: [template, demo]
 reference-section-title: References
 bibliography: bibliography.bib
@@ -44,19 +40,27 @@ note: Extra footnote.
 
 # Introduction {#sec-intro}
 
-This is a dummy example 
+[Quarto](https://quarto.org/) is recent tool enabling the generation of polished HTML page or PDF article from Jupyter notebook [@Close2022-dt].
+It can generate, with one command and minimal configuration, 
+PDF formatted according to journal template via extensions---see the [list of journals supported](https://github.com/quarto-journals/).
+This sample article illustrates the formating achieved with the `ieeetran` extension.
+This extension invokes the [official release of Latex IEEEtran style](https://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/).
+Before submitting to a IEEE journal, consult [@Ieee2020-zv] for editorial guidelines and the journal or conference instructions.
 
-First, please get familiar with the following resources: 
+\muted{\lipsum[1-2]}
 
-- [Creating Formats](https://quarto.org/docs/extensions/formats.html) in Quarto as part of the [Extensions](https://quarto.org/docs/extensions/) mechanism.
-- [Journals Articles](https://quarto.org/docs/journals/) for Quarto.
+# Executable code
 
-
-# Code chunk {#sec-chunks}
-
-This format hide chunks by default as option has been set in `_extension.yml` file.
+Quarto can not only format, but also execute on the fly Python code.
+It enables *"executable articles"* [@Lasser2020-wo] which are reproducible.
+@fig-polar illustrates this feature.
+The code generates the figure on the fly when rendering the article.
+Note that the code can be easily hidden, or folded (this only works in the HTML output though, PDF being static).
 
 ```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis."
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -71,9 +75,50 @@ ax.grid(True)
 plt.show()
 ```
 
-### Using references {.unnumbered}
+![A wide figure spanning the two columns](fig-wide.png){#fig-wide fig-env="figure*"}
 
-I did not read this book [@CameronTrivedi2013] but it must be interesting. 
+# Other features {#sec-feature}
 
-Differences between `aft-html` and `aft-pdf`: 
+Wide figure are supported, as demonstrated by @fig-wide, by appending `fig-env="figure*"` to the figure statement.
+
+
+\muted{\lipsum[1-2]}
+
+## Equation
+
+@eq-maxwell shows a block of equations.
+
+$$
+ \begin{aligned}\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned} 
+$$ {#eq-maxwell}
+
+
+## Tables
+
+@tbl-parameters illustrates a simple table.
+Data-rich tables, with live-data, could also be manipulated in Python and rendered on the fly.
+Wide tables, spanning two columns, are supported via a workaround.
+Wrap the wide table with `\def\wide{1}` and `\def\wide{0}`.
+
+
+|        Parameter         |     Symbol     | Min | Typ | Max | Unit |
+| ------------------------ | -------------- | --- | --- | --- | ---- |
+| Supply current           | $i_\text{off}$ | -   | -   | 10  | mA   |
+| Hall sensitivity         | $S_\text{H}$   | 0.2 | -   | -   | V/T  |
+| Effective nr. of bits | $\text{ENOB}$  | 12  | -   | -   | -    |
+
+: Table of sensor parameters {#tbl-parameters}
+
+## Conclusion
+
+We have showed how the extension handles all key elements of scholarly writing.
+With one line of code, a Jupyter notebook (or it text equivalent) can be formatted into a IEEE article, almost ready for submission.
+During the drafting, the HTML output should be preferred (render with option `--to ieeetran-html`).
+It is quicker, and float placement is trivial.
+In addition, the HTML format, with its dynamic features, opens up advanced features, like interactive plots to engage with the readers [@Close2022-dt].
+
+
+
+
+
 

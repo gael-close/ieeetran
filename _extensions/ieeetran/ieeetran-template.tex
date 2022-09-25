@@ -1,0 +1,107 @@
+\documentclass[letterpaper, 10 pt, journal, twoside]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% Quarto basics
+$pandoc.tex()$
+
+% Common packages
+\usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{threeparttable}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{orcidlink}
+% monofont
+\usepackage[scaled=0.8]{inconsolata}
+
+% Fix table in 2-column format
+% https://tex.stackexchange.com/a/224096
+% enable wide table 
+\makeatletter
+\let\oldlt\longtable
+\let\endoldlt\endlongtable
+\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
+% wide table
+\ifdefined\wide
+\def\longtable@i[#1]{\begin{figure*}[t]
+\onecolumn
+\begin{minipage}{1.0\textwidth}
+\oldlt[#1]
+}
+\def\longtable@ii{\begin{figure*}[t]
+\onecolumn
+\begin{minipage}{1.0\textwidth}
+\oldlt
+}
+\def\endlongtable{\endoldlt
+\end{minipage}
+\twocolumn
+\end{figure*}}
+% regular table
+\else
+\def\longtable@i[#1]{\begin{figure}[t]
+    \onecolumn
+    \begin{minipage}{0.5\textwidth}
+    \oldlt[#1]
+    }
+    \def\longtable@ii{\begin{figure}[t]
+    \onecolumn
+    \begin{minipage}{0.5\textwidth}
+    \oldlt
+    }
+    \def\endlongtable{\endoldlt
+    \end{minipage}
+    \twocolumn
+    \end{figure}} 
+\fi
+\makeatother
+
+
+% Muted text (for filler text)
+\newcommand\muted[1]{%
+\bgroup
+\hskip0pt\color{black!40!}%
+#1%
+\egroup
+}
+
+% color links
+\usepackage{hyperref}
+\hypersetup{ colorlinks, citecolor=teal, linkcolor=teal, urlcolor=teal}
+
+
+\begin{document}
+
+% author blocks
+\author{
+    $for(by-author)$
+    $by-author.name.literal$\(^$by-author.note.text$\)$if(by-author.orcid)$\orcidlink{$by-author.orcid$}$endif$$sep$, $endfor$
+
+    \thanks{$for(affiliations)$\(^$it.number$\)$affiliations.name$.$sep$ $endfor$}
+    \thanks{Released on: $date$}
+    \thanks{$note$.}
+}
+
+
+% title
+\title{$title$}
+\maketitle
+
+% abstract
+\begin{abstract}
+    $abstract$
+\end{abstract}
+
+% body
+$body$
+
+% done
+\end{document}

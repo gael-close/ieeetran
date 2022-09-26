@@ -1,26 +1,17 @@
 # IEEEtran Format Template
 
+**Gael Close** | 26-Sep-2022
+
 This is a Quarto template that assists you in creating a manuscript for IEEE Transactions journals and conferences. 
 The directory [style-guide](style-guide) contains the reference sample PDF downloaded as part of the [IEEE template selector](https://template-selector.ieee.org/secure/templateSelector/publicationType).
 This templates will generate an output with similar formatting.
 
-## Creating a New Article
 
-You can use this as a template to create an article. To do this, use the following command:
-
-```bash
-quarto use template quarto-journals/ieeetran
-```
-
-This will install the extension and create an example qmd file and bibiography that you can use as a starting place for your article.
 
 ## Installation For Existing Document
 
-You may also use this format with an existing Quarto project or document. From the quarto project or document directory, run the following command to install this format:
-
-```bash
-quarto install extension quarto-journals/ieeetran
-```
+You may use this format with an existing Quarto project or document.
+Unzip the content of this repository in the quarto project or document directory.
 
 ## Usage
 

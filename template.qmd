@@ -105,9 +105,12 @@ Wrap the wide table with `\def\wide{1}` and `\def\wide{0}`.
 | ------------------------ | -------------- | --- | --- | --- | ---- |
 | Supply current           | $i_\text{off}$ | -   | -   | 10  | mA   |
 | Hall sensitivity         | $S_\text{H}$   | 0.2 | -   | -   | V/T  |
-| Effective nr. of bits | $\text{ENOB}$  | 12  | -   | -   | -    |
+| Effective nr. of bits[^1]| $\text{ENOB}$  | 12  | -   | -   | -    |
+
 
 : Table of sensor parameters {#tbl-parameters}
+
+[^1]: at 1 kHz
 
 ## Conclusion
 

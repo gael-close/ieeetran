@@ -30,7 +30,7 @@ format:
     keep-tex: true    
 ```
 
-You can view a preview of the rendered template at <https://quarto-journals.github.io/ieeetran/>.
+You can view a preview of the rendered template [here](template.pdf).
 
 ## Format Options
 

@@ -52,10 +52,10 @@ Before submitting to a IEEE journal, consult [@Ieee2020-zv] for editorial guidel
 # Executable code
 
 Quarto can not only format, but also execute on the fly Python code.
-It enables *"executable articles"* [@Lasser2020-wo] which are reproducible.
+It enables *"executable articles"* [@Lasser2020-wo].
 @fig-polar illustrates this feature.
-The code generates the figure on the fly when rendering the article.
-Note that the code can be easily hidden, or folded (this only works in the HTML output though, PDF being static).
+The code, included in the article, generates the figure on the fly when rendering the article.
+Note that the code can be easily hidden, or folded (this only works in the HTML output though, the PDF being static).
 
 ```{python}
 #| label: fig-polar
@@ -81,22 +81,21 @@ plt.show()
 
 Wide figure are supported, as demonstrated by @fig-wide, by appending `fig-env="figure*"` to the figure statement.
 
-
-\muted{\lipsum[1-2]}
+\muted{\lipsum[1]}
 
 ## Equation
 
 @eq-maxwell shows a block of equations.
 
 $$
- \begin{aligned}\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned} 
+ \begin{aligned}\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho 
+ \end{aligned} 
 $$ {#eq-maxwell}
 
 
 ## Tables
 
 @tbl-parameters illustrates a simple table.
-Data-rich tables, with live-data, could also be manipulated in Python and rendered on the fly.
 Wide tables, spanning two columns, are supported via a workaround.
 Wrap the wide table with `\def\wide{1}` and `\def\wide{0}`.
 
@@ -105,23 +104,78 @@ Wrap the wide table with `\def\wide{1}` and `\def\wide{0}`.
 | ------------------------ | -------------- | --- | --- | --- | ---- |
 | Supply current           | $i_\text{off}$ | -   | -   | 10  | mA   |
 | Hall sensitivity         | $S_\text{H}$   | 0.2 | -   | -   | V/T  |
-| Effective nr. of bits[^1]| $\text{ENOB}$  | 12  | -   | -   | -    |
+| Effective nr. of bits| $\text{ENOB}$  | 12  | -   | -   | -    |
 
 
 : Table of sensor parameters {#tbl-parameters}
 
-[^1]: at 1 kHz
+
+```{python}
+#| echo: false
+
+from IPython.display import Latex
+import pandas as pd
+cidx = pd.MultiIndex.from_arrays([
+    ["Equity", "Equity", "Equity", "Equity",
+     "Stats", "Stats", "Stats", "Stats", "Rating"],
+    ["Energy", "Energy", "Consumer", "Consumer", "", "", "", "", ""],
+    ["BP", "Shell", "H&M", "Unilever",
+     "Std Dev", "Variance", "52w High", "52w Low", ""]
+])
+iidx = pd.MultiIndex.from_arrays([
+    ["Equity", "Equity", "Equity", "Equity"],
+    ["Energy", "Energy", "Consumer", "Consumer"],
+    ["BP", "Shell", "H&M", "Unilever"]
+])
+styler = pd.DataFrame([
+    [1, 0.8, 0.66, 0.72, 32.1678, 32.1678**2, 335.12, 240.89, "Buy"],
+    [0.8, 1.0, 0.69, 0.79, 1.876, 1.876**2, 14.12, 19.78, "Hold"],
+    [0.66, 0.69, 1.0, 0.86, 7, 7**2, 210.9, 140.6, "Buy"],
+    [0.72, 0.79, 0.86, 1.0, 213.76, 213.76**2, 2807, 3678, "Sell"],
+], columns=cidx, index=iidx).style
+
+styler.format(subset="Equity", precision=2)\
+      .format(subset="Stats", precision=1, thousands=",")\
+      .format(subset="Rating", formatter=str.upper)\
+      .format_index(escape="latex", axis=1)\
+      .format_index(escape="latex", axis=0)\
+      .hide(level=0, axis=0)  
+def rating_color(v):
+    if v == "Buy": color = "#006400"
+    elif v == "Sell": color = "red"
+    else: color = "gray"
+    return f"color: {color}; font-weight: bold;"
+styler.background_gradient(cmap="inferno", subset="Equity", vmin=0, vmax=1)\
+      .applymap(rating_color, subset="Rating")  
+styler.applymap_index(
+    lambda v: "rotatebox:{45}--rwrap--latex;", level=2, axis=1
+) 
+
+Latex(styler.to_latex(
+    caption="Selected stock correlation and simple statistics",
+    label="tbl-styled",
+    clines="skip-last;data",
+    convert_css=True,
+    multicol_align="|c|",
+    hrules=True,
+    environment='table*',
+    position_float='centering',
+    position='!b',
+
+)) 
+```
+
+Data-rich tables can also be generated **programmatically** from Python code, and rendered on the fly.
+As an example, we execute here the example code from [the Pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.to_latex.html#pandas.io.formats.style.Styler.to_latex) for a complicated styled table.
+The result is rendered in Table \ref{tbl-styled}.
+Clearly, generating such table in plain Latex would be **painful**.
+And the Latex code would have to be tweaked with each data update.
+<!-- Cannot use @tbl-styled here as this label is defined in latex -->
 
 ## Conclusion
 
 We have showed how the extension handles all key elements of scholarly writing.
 With one line of code, a Jupyter notebook (or it text equivalent) can be formatted into a IEEE article, almost ready for submission.
-During the drafting, the HTML output should be preferred (render with option `--to ieeetran-html`).
-It is quicker, and float placement is trivial.
+During the drafting, the HTML output should be preferred (use option `--to ieeetran-html` to render to HTML).
+It is quicker, and figure/table placement is trivial.
 In addition, the HTML format, with its dynamic features, opens up advanced features, like interactive plots to engage with the readers [@Close2022-dt].
-
-
-
-
-
-

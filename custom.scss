@@ -1,0 +1,22 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+
+$font-family-base: 'Source Sans Pro' !default;
+$font-size-base: 1.1rem;
+
+p,
+li {
+  font-family: 'Source Serif Pro', Georgia, serif;
+}
+
+/* style tweak */
+
+.listing-description {
+  font-size: 0.8rem !important;
+}
+
+code {
+  font-size: 14px !important;
+}

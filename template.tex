@@ -1,0 +1,433 @@
+\documentclass[letterpaper, 10 pt, journal, twoside]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% Quarto basics
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+
+% Common packages
+\usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{threeparttable}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{orcidlink}
+% monofont
+\usepackage[scaled=0.8]{inconsolata}
+
+%styled tabled generated from pandas
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{stfloats} % https://tex.stackexchange.com/a/324358
+
+% Fix table in 2-column format
+% https://tex.stackexchange.com/a/224096
+% enable wide table 
+\makeatletter
+\let\oldlt\longtable
+\let\endoldlt\endlongtable
+\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
+% wide table
+\ifdefined\wide
+\def\longtable@i[#1]{\begin{figure*}[t]
+\onecolumn
+\begin{minipage}{1.0\textwidth}
+\oldlt[#1]
+}
+\def\longtable@ii{\begin{figure*}[t]
+\onecolumn
+\begin{minipage}{1.0\textwidth}
+\oldlt
+}
+\def\endlongtable{\endoldlt
+\end{minipage}
+\twocolumn
+\end{figure*}}
+% regular table
+\else
+\def\longtable@i[#1]{\begin{figure}[t]
+    \onecolumn
+    \begin{minipage}{0.5\textwidth}
+    \oldlt[#1]
+    }
+    \def\longtable@ii{\begin{figure}[t]
+    \onecolumn
+    \begin{minipage}{0.5\textwidth}
+    \oldlt
+    }
+    \def\endlongtable{\endoldlt
+    \end{minipage}
+    \twocolumn
+    \end{figure}} 
+\fi
+\makeatother
+
+
+% Muted text (for filler text)
+\newcommand\muted[1]{%
+\bgroup
+\hskip0pt\color{black!40!}%
+#1%
+\egroup
+}
+
+% color links
+\usepackage{hyperref}
+\hypersetup{ colorlinks, citecolor=teal, linkcolor=teal, urlcolor=teal}
+
+
+\begin{document}
+
+% author blocks
+\author{
+        First Author\(^1\)\orcidlink{0000-0000-0000-0000},     Second
+Author\(^1\)\orcidlink{0000-0000-0000-0000},     Third Author\(^2\)
+    \thanks{\(^1\)Stanford University. \(^2\)Some corporation.}
+    \thanks{Released on: 01-Jan-2022.}
+    \thanks{Extra footnote..}
+}
+
+
+% title
+\title{A Sample Article for IEEE Transactions}
+\maketitle
+
+% abstract
+\begin{abstract}
+    This document is a sample illustrating the Quarto \texttt{ieeetran}
+    template. It includes the key elements of a scientific articles
+    (references, equations, figures, tables, code, cross references).
+    The template enables the generation of IEEE-formatted article from a
+    Jupypter notebook.
+\end{abstract}
+
+% body
+\hypertarget{sec-intro}{%
+\section{Introduction}\label{sec-intro}}
+
+\href{https://quarto.org/}{Quarto} is recent tool enabling the
+generation of polished HTML page or PDF article from Jupyter notebook
+\protect\hyperlink{ref-Close2022-dt}{{[}1{]}}. It can generate, with one
+command and minimal configuration, PDF formatted according to journal
+template via extensions---see the
+\href{https://github.com/quarto-journals/}{list of journals supported}.
+This sample article illustrates the formating achieved with the
+\texttt{ieeetran} extension. This extension invokes the
+\href{https://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/}{official
+release of Latex IEEEtran style}. Before submitting to a IEEE journal,
+consult \protect\hyperlink{ref-Ieee2020-zv}{{[}2{]}} for editorial
+guidelines and the journal or conference instructions.
+
+\muted{\lipsum[1-2]}
+
+\hypertarget{executable-code}{%
+\section{Executable code}\label{executable-code}}
+
+Quarto can not only format, but also execute on the fly Python code. It
+enables \emph{``executable articles''}
+\protect\hyperlink{ref-Lasser2020-wo}{{[}3{]}}. Figure~\ref{fig-polar}
+illustrates this feature. The code, included in the article, generates
+the figure on the fly when rendering the article. Note that the code can
+be easily hidden, or folded (this only works in the HTML output though,
+the PDF being static).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{r }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{0.01}\NormalTok{)}
+\NormalTok{theta }\OperatorTok{=} \DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi }\OperatorTok{*}\NormalTok{ r}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots(}
+\NormalTok{  subplot\_kw }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}projection\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{\} }
+\NormalTok{)}
+\NormalTok{ax.plot(theta, r)}
+\NormalTok{ax.set\_rticks([}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{1.5}\NormalTok{, }\DecValTok{2}\NormalTok{])}
+\NormalTok{ax.grid(}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{template_files/figure-pdf/fig-polar-output-1.png}
+
+}
+
+\caption{\label{fig-polar}A line plot on a polar axis.}
+
+\end{figure}
+
+\begin{figure*}
+
+{\centering \includegraphics{fig-wide.png}
+
+}
+
+\caption{\label{fig-wide}A wide figure spanning the two columns}
+
+\end{figure*}
+
+\hypertarget{sec-feature}{%
+\section{Other features}\label{sec-feature}}
+
+Wide figure are supported, as demonstrated by Figure~\ref{fig-wide}, by
+appending \texttt{fig-env="figure*"} to the figure statement.
+
+\muted{\lipsum[1]}
+
+\hypertarget{equation}{%
+\subsection{Equation}\label{equation}}
+
+Equation~\ref{eq-maxwell} shows a block of equations.
+
+\begin{equation}\protect\hypertarget{eq-maxwell}{}{
+ \begin{aligned}\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho 
+ \end{aligned} 
+}\label{eq-maxwell}\end{equation}
+
+\hypertarget{tables}{%
+\subsection{Tables}\label{tables}}
+
+Table~\ref{tbl-parameters} illustrates a simple table. Wide tables,
+spanning two columns, are supported via a workaround. Wrap the wide
+table with \texttt{\textbackslash{}def\textbackslash{}wide\{1\}} and
+\texttt{\textbackslash{}def\textbackslash{}wide\{0\}}.
+
+\hypertarget{tbl-parameters}{}
+\begin{longtable}[]{@{}llllll@{}}
+\caption{\label{tbl-parameters}Table of sensor
+parameters}\tabularnewline
+\toprule()
+Parameter & Symbol & Min & Typ & Max & Unit \\
+\midrule()
+\endfirsthead
+\toprule()
+Parameter & Symbol & Min & Typ & Max & Unit \\
+\midrule()
+\endhead
+Supply current & \(i_\text{off}\) & - & - & 10 & mA \\
+Hall sensitivity & \(S_\text{H}\) & 0.2 & - & - & V/T \\
+Effective nr. of bits & \(\text{ENOB}\) & 12 & - & - & - \\
+\bottomrule()
+\end{longtable}
+
+\begin{table*}[!b]
+\centering
+\caption{Selected stock correlation and simple statistics}
+\label{tbl-styled}
+\begin{tabular}{llrrrrrrrrl}
+\toprule
+ &  & \multicolumn{4}{|c|}{Equity} & \multicolumn{4}{|c|}{Stats} & Rating \\
+ &  & \multicolumn{2}{|c|}{Energy} & \multicolumn{2}{|c|}{Consumer} & \multicolumn{4}{|c|}{} &  \\
+ &  & \rotatebox{45}{BP} & \rotatebox{45}{Shell} & \rotatebox{45}{H\&M} & \rotatebox{45}{Unilever} & \rotatebox{45}{Std Dev} & \rotatebox{45}{Variance} & \rotatebox{45}{52w High} & \rotatebox{45}{52w Low} & \rotatebox{45}{} \\
+\midrule
+\multirow[c]{2}{*}{Energy} & BP & {\cellcolor[HTML]{FCFFA4}} \color[HTML]{000000} 1.00 & {\cellcolor[HTML]{FCA50A}} \color[HTML]{000000} 0.80 & {\cellcolor[HTML]{EB6628}} \color[HTML]{F1F1F1} 0.66 & {\cellcolor[HTML]{F68013}} \color[HTML]{F1F1F1} 0.72 & 32.2 & 1,034.8 & 335.1 & 240.9 & \color[HTML]{006400} \bfseries BUY \\
+ & Shell & {\cellcolor[HTML]{FCA50A}} \color[HTML]{000000} 0.80 & {\cellcolor[HTML]{FCFFA4}} \color[HTML]{000000} 1.00 & {\cellcolor[HTML]{F1731D}} \color[HTML]{F1F1F1} 0.69 & {\cellcolor[HTML]{FCA108}} \color[HTML]{000000} 0.79 & 1.9 & 3.5 & 14.1 & 19.8 & \color{gray} \bfseries HOLD \\
+\cline{1-11}
+\multirow[c]{2}{*}{Consumer} & H\&M & {\cellcolor[HTML]{EB6628}} \color[HTML]{F1F1F1} 0.66 & {\cellcolor[HTML]{F1731D}} \color[HTML]{F1F1F1} 0.69 & {\cellcolor[HTML]{FCFFA4}} \color[HTML]{000000} 1.00 & {\cellcolor[HTML]{FAC42A}} \color[HTML]{000000} 0.86 & 7.0 & 49.0 & 210.9 & 140.6 & \color[HTML]{006400} \bfseries BUY \\
+ & Unilever & {\cellcolor[HTML]{F68013}} \color[HTML]{F1F1F1} 0.72 & {\cellcolor[HTML]{FCA108}} \color[HTML]{000000} 0.79 & {\cellcolor[HTML]{FAC42A}} \color[HTML]{000000} 0.86 & {\cellcolor[HTML]{FCFFA4}} \color[HTML]{000000} 1.00 & 213.8 & 45,693.3 & 2,807.0 & 3,678.0 & \color{red} \bfseries SELL \\
+\cline{1-11}
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Data-rich tables can also be generated \textbf{programmatically} from
+Python code, and rendered on the fly. As an example, we execute here the
+example code from
+\href{https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.to_latex.html\#pandas.io.formats.style.Styler.to_latex}{the
+Pandas documentation} for a complicated styled table. The result is
+rendered in Table~\ref{tbl-styled}. Clearly, generating such table in
+plain Latex would be \textbf{painful}. And the Latex code would have to
+be tweaked with each data update.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+We have showed how the extension handles all key elements of scholarly
+writing. With one line of code, a Jupyter notebook (or it text
+equivalent) can be formatted into a IEEE article, almost ready for
+submission. During the drafting, the HTML output should be preferred
+(use option \texttt{-\/-to\ ieeetran-html} to render to HTML). It is
+quicker, and figure/table placement is trivial. In addition, the HTML
+format, with its dynamic features, opens up advanced features, like
+interactive plots to engage with the readers
+\protect\hyperlink{ref-Close2022-dt}{{[}1{]}}.
+
+\hypertarget{bibliography}{%
+\section*{References}\label{bibliography}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-Close2022-dt}{}}%
+\CSLLeftMargin{{[}1{]} }%
+\CSLRightInline{G. Close, {``Technical writing and publishing
+{Data-Rich} articles with quarto.''} Towards Data Science, Sep. 2022
+{[}Online{]}. Available:
+\url{https://towardsdatascience.com/technical-writing-and-publishing-data-rich-articles-with-quarto-d61a56bcaa64}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Ieee2020-zv}{}}%
+\CSLLeftMargin{{[}2{]} }%
+\CSLRightInline{IEEE, {``{IEEE} editorial style manual for authors.''}
+Apr. 2020 {[}Online{]}. Available:
+\url{https://journals.ieeeauthorcenter.ieee.org/your-role-in-article-production/ieee-editorial-style-manual/}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Lasser2020-wo}{}}%
+\CSLLeftMargin{{[}3{]} }%
+\CSLRightInline{J. Lasser, {``Creating an executable paper is a journey
+through open science,''} \emph{Communications Physics}, vol. 3, no. 1,
+pp. 1--5, Aug. 2020 {[}Online{]}. Available:
+\url{https://www.nature.com/articles/s42005-020-00403-4}}
+
+\end{CSLReferences}
+
+% done
+\end{document}

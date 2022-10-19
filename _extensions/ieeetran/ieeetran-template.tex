@@ -5,6 +5,7 @@
 $pandoc.tex()$
 
 % Common packages
+\usepackage[T1]{fontenc}
 \usepackage{lipsum}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -27,47 +28,29 @@ $pandoc.tex()$
 \usepackage{multirow}
 \usepackage{stfloats} % https://tex.stackexchange.com/a/324358
 
-% Fix table in 2-column format
+% Fix table in 2-column format and enable wide table
 % https://tex.stackexchange.com/a/224096
-% enable wide table 
 \makeatletter
-\let\oldlt\longtable
-\let\endoldlt\endlongtable
-\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
-% wide table
-\ifdefined\wide
-\def\longtable@i[#1]{\begin{figure*}[t]
-\onecolumn
-\begin{minipage}{1.0\textwidth}
-\oldlt[#1]
-}
-\def\longtable@ii{\begin{figure*}[t]
-\onecolumn
-\begin{minipage}{1.0\textwidth}
-\oldlt
-}
-\def\endlongtable{\endoldlt
-\end{minipage}
-\twocolumn
-\end{figure*}}
-% regular table
-\else
-\def\longtable@i[#1]{\begin{figure}[t]
+% My tables
+\newenvironment{mytable}[1][htbp]{
+    \begin{figure}[#1]
     \onecolumn
-    \begin{minipage}{0.5\textwidth}
-    \oldlt[#1]
-    }
-    \def\longtable@ii{\begin{figure}[t]
-    \onecolumn
-    \begin{minipage}{0.5\textwidth}
-    \oldlt
-    }
-    \def\endlongtable{\endoldlt
+    \begin{minipage}{0.5\textwidth}}
+{
     \end{minipage}
     \twocolumn
-    \end{figure}} 
-\fi
+    \end{figure}}
+
+\newenvironment{mywidetable}[1][htbp]{
+    \begin{figure*}[#1]
+    \onecolumn
+    \begin{minipage}{1.0\textwidth}}
+{
+    \end{minipage}
+    \twocolumn
+    \end{figure*}}
 \makeatother
+
 
 
 % Muted text (for filler text)

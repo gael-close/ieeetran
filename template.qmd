@@ -36,6 +36,9 @@ keywords: [template, demo]
 reference-section-title: References
 bibliography: bibliography.bib
 note: Extra footnote.
+filters:
+   - latex-environment
+environments: [mytable, mywidetable]
 ---
 
 # Introduction {#sec-intro}
@@ -95,20 +98,19 @@ $$ {#eq-maxwell}
 
 ## Tables
 
-@tbl-parameters illustrates a simple table.
-Wide tables, spanning two columns, are supported via a workaround.
-Wrap the wide table with `\def\wide{1}` and `\def\wide{0}`.
-
-
-|        Parameter         |     Symbol     | Min | Typ | Max | Unit |
-| ------------------------ | -------------- | --- | --- | --- | ---- |
-| Supply current           | $i_\text{off}$ | -   | -   | 10  | mA   |
-| Hall sensitivity         | $S_\text{H}$   | 0.2 | -   | -   | V/T  |
-| Effective nr. of bits| $\text{ENOB}$  | 12  | -   | -   | -    |
-
+::: {.mytable options="!t"}
+|       Parameter       |      Symbol      | Min | Typ | Max | Unit |
+| --------------------- | ---------------- | --- | --- | --- | ---- |
+| Supply current        | $i_\mathrm{off}$ | -   | -   | 10  | mA   |
+| Hall sensitivity      | $S_\mathrm{H}$   | 0.2 | -   | -   | V/T  |
+| Effective nr. of bits | $\mathrm{ENOB}$  | 12  | -   | -   | -    |
 
 : Table of sensor parameters {#tbl-parameters}
+:::
 
+
+Tables are problematic due to 2-column nature of the IEEE class, but an easy workaround exist. @tbl-parameters illustrates a simple table.
+Such table should be wrapped with a custom environment `mytable` (or `mywidecolumn` for wide table spanning the 2 columns) via the [extension latex-environment](https://github.com/quarto-ext/latex-environment).
 
 ```{python}
 #| echo: false

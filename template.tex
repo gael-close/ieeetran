@@ -145,6 +145,7 @@
 \makeatother
 
 % Common packages
+\usepackage[T1]{fontenc}
 \usepackage{lipsum}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -167,47 +168,29 @@
 \usepackage{multirow}
 \usepackage{stfloats} % https://tex.stackexchange.com/a/324358
 
-% Fix table in 2-column format
+% Fix table in 2-column format and enable wide table
 % https://tex.stackexchange.com/a/224096
-% enable wide table 
 \makeatletter
-\let\oldlt\longtable
-\let\endoldlt\endlongtable
-\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
-% wide table
-\ifdefined\wide
-\def\longtable@i[#1]{\begin{figure*}[t]
-\onecolumn
-\begin{minipage}{1.0\textwidth}
-\oldlt[#1]
-}
-\def\longtable@ii{\begin{figure*}[t]
-\onecolumn
-\begin{minipage}{1.0\textwidth}
-\oldlt
-}
-\def\endlongtable{\endoldlt
-\end{minipage}
-\twocolumn
-\end{figure*}}
-% regular table
-\else
-\def\longtable@i[#1]{\begin{figure}[t]
+% My tables
+\newenvironment{mytable}[1][htbp]{
+    \begin{figure}[#1]
     \onecolumn
-    \begin{minipage}{0.5\textwidth}
-    \oldlt[#1]
-    }
-    \def\longtable@ii{\begin{figure}[t]
-    \onecolumn
-    \begin{minipage}{0.5\textwidth}
-    \oldlt
-    }
-    \def\endlongtable{\endoldlt
+    \begin{minipage}{0.5\textwidth}}
+{
     \end{minipage}
     \twocolumn
-    \end{figure}} 
-\fi
+    \end{figure}}
+
+\newenvironment{mywidetable}[1][htbp]{
+    \begin{figure*}[#1]
+    \onecolumn
+    \begin{minipage}{1.0\textwidth}}
+{
+    \end{minipage}
+    \twocolumn
+    \end{figure*}}
 \makeatother
+
 
 
 % Muted text (for filler text)
@@ -230,7 +213,7 @@
         First Author\(^1\)\orcidlink{0000-0000-0000-0000},     Second
 Author\(^1\)\orcidlink{0000-0000-0000-0000},     Third Author\(^2\)
     \thanks{\(^1\)Stanford University. \(^2\)Some corporation.}
-    \thanks{Released on: 01-Jan-2022.}
+    \thanks{Released on: 1/1/22}
     \thanks{Extra footnote..}
 }
 
@@ -336,10 +319,7 @@ Equation~\ref{eq-maxwell} shows a block of equations.
 \hypertarget{tables}{%
 \subsection{Tables}\label{tables}}
 
-Table~\ref{tbl-parameters} illustrates a simple table. Wide tables,
-spanning two columns, are supported via a workaround. Wrap the wide
-table with \texttt{\textbackslash{}def\textbackslash{}wide\{1\}} and
-\texttt{\textbackslash{}def\textbackslash{}wide\{0\}}.
+\begin{mytable}[!t]
 
 \hypertarget{tbl-parameters}{}
 \begin{longtable}[]{@{}llllll@{}}
@@ -353,11 +333,21 @@ Parameter & Symbol & Min & Typ & Max & Unit \\
 Parameter & Symbol & Min & Typ & Max & Unit \\
 \midrule()
 \endhead
-Supply current & \(i_\text{off}\) & - & - & 10 & mA \\
-Hall sensitivity & \(S_\text{H}\) & 0.2 & - & - & V/T \\
-Effective nr. of bits & \(\text{ENOB}\) & 12 & - & - & - \\
+Supply current & \(i_\mathrm{off}\) & - & - & 10 & mA \\
+Hall sensitivity & \(S_\mathrm{H}\) & 0.2 & - & - & V/T \\
+Effective nr. of bits & \(\mathrm{ENOB}\) & 12 & - & - & - \\
 \bottomrule()
 \end{longtable}
+
+\end{mytable}
+
+Tables are problematic due to 2-column nature of the IEEE class, but an
+easy workaround exist. Table~\ref{tbl-parameters} illustrates a simple
+table. Such table should be wrapped with a custom environment
+\texttt{mytable} (or \texttt{mywidecolumn} for wide table spanning the 2
+columns) via the
+\href{https://github.com/quarto-ext/latex-environment}{extension
+latex-environment}.
 
 \begin{table*}[!b]
 \centering

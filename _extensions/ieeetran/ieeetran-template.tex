@@ -1,7 +1,10 @@
 \documentclass[letterpaper, 10 pt, journal, twoside]{IEEEtran}
 \IEEEoverridecommandlockouts
 
-% Quarto basics
+% Quarto basics minus two problematic packages
+\RequirePackage{scrlfile}
+\PreventPackageFromLoading{sidenotes}
+\PreventPackageFromLoading{marginnotes}
 $pandoc.tex()$
 
 % Common packages
@@ -34,6 +37,7 @@ $pandoc.tex()$
 % My tables
 \newenvironment{mytable}[1][htbp]{
     \begin{figure}[#1]
+    \footnotesize
     \onecolumn
     \begin{minipage}{0.5\textwidth}}
 {
@@ -41,14 +45,18 @@ $pandoc.tex()$
     \twocolumn
     \end{figure}}
 
-\newenvironment{mywidetable}[1][htbp]{
+\newenvironment{mywidetable}[1][tbp]{
     \begin{figure*}[#1]
+    \footnotesize
     \onecolumn
     \begin{minipage}{1.0\textwidth}}
 {
     \end{minipage}
     \twocolumn
     \end{figure*}}
+
+\renewenvironment{table*}{\begin{mywidetable}}{\end{mywidetable}\ignorespacesafterend}
+\renewenvironment{table}{\begin{mytable}}{\end{mytable}\ignorespacesafterend}    
 \makeatother
 
 
